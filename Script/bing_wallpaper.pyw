@@ -35,10 +35,15 @@ def get_image():
 	print(url_uhd)
 	# img_save_path=file_dir+"images_download/"+utc_today+re.findall(r'id=(.*?jpg)',image_name_uhd)[0]
 	img_save_path=file_dir+utc_today+'.jpg'
+	# 提取地名
+	img_fromwhere = []
+	img_fromwhere = [s for str in image_info.split(",") for s in str.split("，")]  # this line was written via GPT
+	img_fromwhere = img_fromwhere[0]
+	img_save_path2=file_dir+utc_today+'-'+img_fromwhere+'.jpg'
 	print(img_save_path)
 	
 	img = requests.get(url_uhd)
-	with open(img_save_path, "wb") as fwi:
+	with open(img_save_path2, "wb") as fwi:
 		fwi.write(img.content)
 		print(img_save_path + "下载成功")
     
